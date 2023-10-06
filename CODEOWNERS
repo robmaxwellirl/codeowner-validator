@@ -1,4 +1,9 @@
 # Repository CODEOWNERS
 
-* @actions/actions-runtime
-* @ncalteen
+CODEOWNERS @robmaxwellirl
+/src/ @robmaxwellirl
+package.json @robmaxwellirl
+dist/ @robmaxwellirl
+.github/ @robmaxwellirl
+*.md @robmaxwellirl
+*.json @robmaxwellirl

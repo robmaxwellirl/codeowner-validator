@@ -1,26 +1,60 @@
 import * as core from '@actions/core'
-import { wait } from './wait'
+import * as github from '@actions/github'
 
-/**
- * The main function for the action.
- * @returns {Promise<void>} Resolves when the action is complete.
- */
+import { parseCodeOwners, iterateOnCodeOwners } from './codeowner'
+
+const codeownersFile = 'CODEOWNERS'
+
 export async function run(): Promise<void> {
   try {
-    const ms: string = core.getInput('milliseconds')
+    const token = core.getInput('github-token')
+    core.info(`Token: ${token}`)
+    const octokit = github.getOctokit(token)
 
-    // Debug logs are only output if the `ACTIONS_STEP_DEBUG` secret is true
-    core.debug(`Waiting ${ms} milliseconds ...`)
+    const { owner, repo } = github.context.repo
 
-    // Log the current timestamp, wait, then log the new timestamp
-    core.debug(new Date().toTimeString())
-    await wait(parseInt(ms, 10))
-    core.debug(new Date().toTimeString())
+    const { data: codeOwnersData } = await octokit.rest.repos.getContent({
+      owner,
+      repo,
+      path: codeownersFile,
+      ref: github.context.ref
+    })
 
-    // Set outputs for other workflow steps to use
-    core.setOutput('time', new Date().toTimeString())
+    // Check that the API returned the contents of the CODEOWNERS file
+    if (!('content' in codeOwnersData)) {
+      core.setFailed(`No CODEOWNERS file found`)
+      return
+    }
+
+    const codeOwnersFile = Buffer.from(
+      codeOwnersData.content,
+      'base64'
+    ).toString()
+
+    const codeOwners = parseCodeOwners(codeOwnersFile)
+
+    for (const codeOwner of codeOwners) {
+      core.debug(`Path: ${codeOwner.path}, Owner: ${codeOwner.username}`)
+    }
+
+    //list all files in the repo.
+    const files = await octokit.rest.git.getTree({
+      owner,
+      repo,
+      tree_sha: github.context.ref,
+      recursive: 'true'
+    })
+
+    const fileList: string[] = []
+    for (const file of files.data.tree) {
+      if (file?.type !== 'tree') {
+        fileList.push(`${file.path}`)
+      }
+    }
+
+    const orphanedCodeownerFiles = iterateOnCodeOwners(codeOwners, fileList)
+    core.notice(`Orphaned files: ${orphanedCodeownerFiles}`)
   } catch (error) {
-    // Fail the workflow run if an error occurs
-    if (error instanceof Error) core.setFailed(error.message)
+    core.setFailed(`Errors were found while running the action: ${error}`)
   }
 }
