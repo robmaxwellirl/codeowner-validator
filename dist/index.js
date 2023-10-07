@@ -10415,7 +10415,8 @@ async function run() {
             }
         }
         const orphanedCodeownerFiles = (0, codeowner_1.iterateOnCodeOwners)(codeOwners, fileList);
-        core.notice(`Orphaned files: ${orphanedCodeownerFiles}`);
+        const formattedFileList = orphanedCodeownerFiles.join('\n');
+        core.notice(`Orphaned files: \n${formattedFileList}`);
     }
     catch (error) {
         core.setFailed(`Errors were found while running the action: ${error}`);

@@ -53,7 +53,8 @@ export async function run(): Promise<void> {
     }
 
     const orphanedCodeownerFiles = iterateOnCodeOwners(codeOwners, fileList)
-    core.notice(`Orphaned files: ${orphanedCodeownerFiles}`)
+    const formattedFileList = orphanedCodeownerFiles.join('\n')
+    core.notice(`Orphaned files: \n${formattedFileList}`)
   } catch (error) {
     core.setFailed(`Errors were found while running the action: ${error}`)
   }
