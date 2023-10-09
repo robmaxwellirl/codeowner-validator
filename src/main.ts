@@ -3,7 +3,7 @@ import * as github from '@actions/github'
 
 import { parseCodeOwners, iterateOnCodeOwners } from './codeowner'
 
-const codeownersFile = 'CODEOWNERS'
+const codeownersFile = core.getInput('codeowners-file')
 
 export async function run(): Promise<void> {
   try {
@@ -54,7 +54,7 @@ export async function run(): Promise<void> {
 
     const orphanedCodeownerFiles = iterateOnCodeOwners(codeOwners, fileList)
     const formattedFileList = orphanedCodeownerFiles.join('\n')
-    core.notice(`Orphaned files: \n${formattedFileList}`)
+    core.error(`Following files have no owners: \n${formattedFileList}`)
   } catch (error) {
     core.setFailed(`Errors were found while running the action: ${error}`)
   }

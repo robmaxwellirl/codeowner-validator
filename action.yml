@@ -7,6 +7,10 @@ inputs:
   github-token:
     description: 'Github token'
     required: true
+  codeowners-file:
+    description: 'Path to the codeowners file'
+    required: false
+    default: '.github/CODEOWNERS'
 
 runs:
   using: node20

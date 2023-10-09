@@ -10378,7 +10378,7 @@ exports.run = void 0;
 const core = __importStar(__nccwpck_require__(2186));
 const github = __importStar(__nccwpck_require__(5438));
 const codeowner_1 = __nccwpck_require__(4905);
-const codeownersFile = 'CODEOWNERS';
+const codeownersFile = core.getInput('codeowners-file');
 async function run() {
     try {
         const token = core.getInput('github-token');
@@ -10416,7 +10416,7 @@ async function run() {
         }
         const orphanedCodeownerFiles = (0, codeowner_1.iterateOnCodeOwners)(codeOwners, fileList);
         const formattedFileList = orphanedCodeownerFiles.join('\n');
-        core.notice(`Orphaned files: \n${formattedFileList}`);
+        core.error(`Following files have no owners: \n${formattedFileList}`);
     }
     catch (error) {
         core.setFailed(`Errors were found while running the action: ${error}`);
