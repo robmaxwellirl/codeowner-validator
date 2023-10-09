@@ -1,5 +1,6 @@
 # Repository CODEOWNERS
 
+* @robmaxwellirl
 CODEOWNERS @robmaxwellirl
 /src/ @robmaxwellirl
 package.json @robmaxwellirl

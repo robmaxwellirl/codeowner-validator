@@ -10417,7 +10417,6 @@ async function run() {
         const orphanedCodeownerFiles = (0, codeowner_1.iterateOnCodeOwners)(codeOwners, fileList);
         const formattedFileList = orphanedCodeownerFiles.join('\n');
         if (formattedFileList.length > 0) {
-            core.error(`Following files have no owners: \n${formattedFileList}`);
             core.setFailed(`Following files have no owners: \n${formattedFileList}`);
         }
         else {

@@ -55,7 +55,6 @@ export async function run(): Promise<void> {
     const orphanedCodeownerFiles = iterateOnCodeOwners(codeOwners, fileList)
     const formattedFileList = orphanedCodeownerFiles.join('\n')
     if (formattedFileList.length > 0) {
-      core.error(`Following files have no owners: \n${formattedFileList}`)
       core.setFailed(`Following files have no owners: \n${formattedFileList}`)
     } else {
       core.info(`All files have owners`)
