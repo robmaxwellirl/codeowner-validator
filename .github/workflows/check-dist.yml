@@ -14,9 +14,13 @@ on:
       - main
     paths-ignore:
       - '**.md'
+      - 'package-lock.json'
+      - 'package.json'
   pull_request:
     paths-ignore:
       - '**.md'
+      - 'package-lock.json'
+      - 'package.json'
   workflow_dispatch:
 
 jobs:
