@@ -31024,7 +31024,7 @@ const codeowner_1 = __nccwpck_require__(4905);
 const codeownersFile = core.getInput('codeowners-file');
 async function run() {
     try {
-        const token = core.getInput('github-token');
+        const token = core.getInput('token');
         core.info(`Token: ${token}`);
         const octokit = github.getOctokit(token);
         const { owner, repo } = github.context.repo;
