@@ -12,6 +12,9 @@ file is correct, it does not actually ensure each file has an owner.
 This will scan through the repository files, and if any file not found to have
 an owner, it will alert on it and fail the check.
 
+It will output the files not owned as part of the status check and output them.
+They should be added to the codeowners file and the check will then pass.
+
 ## Usage
 
 After testing, you can create version tag(s) that developers can use to
