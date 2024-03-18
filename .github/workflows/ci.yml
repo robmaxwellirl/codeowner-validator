@@ -6,6 +6,8 @@ on:
     branches:
       - tst-co
 
+permissions: read-all  
+
 jobs:
   test-typescript:
     name: TypeScript Tests

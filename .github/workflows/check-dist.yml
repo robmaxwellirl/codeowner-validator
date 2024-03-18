@@ -16,6 +16,8 @@ on:
       - dist/**
   workflow_dispatch:
 
+permissions: read-all  
+
 jobs:
   check-dist:
     name: Check dist/
