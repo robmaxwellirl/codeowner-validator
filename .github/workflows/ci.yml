@@ -53,5 +53,5 @@ jobs:
         id: test-action
         uses: ./
         with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
+          token: ${{ secrets.GITHUB_TOKEN }}
           codeowners-file: CODEOWNERS

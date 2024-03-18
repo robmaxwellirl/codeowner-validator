@@ -7,7 +7,7 @@ const codeownersFile = core.getInput('codeowners-file')
 
 export async function run(): Promise<void> {
   try {
-    const token = core.getInput('github-token')
+    const token = core.getInput('token')
     core.info(`Token: ${token}`)
     const octokit = github.getOctokit(token)
 
