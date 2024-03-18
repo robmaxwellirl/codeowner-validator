@@ -1,14 +1,16 @@
-# Codeowner Validator Github Action
+# Codeowner Validator GitHub Action
 
 ![Example workflow](https://github.com/robmaxwellirl/codeowner-validator/actions/workflows/ci.yml/badge.svg)
 ![linting](https://github.com/robmaxwellirl/codeowner-validator/actions/workflows/linter.yml/badge.svg)
 
 ## What is this action for?
 
-This action is to help validate that every file in a repository has an owner defined in the codeowners file.
-Whilst github can validate that a codeowners file is correct, it does not actually ensure each file has an owner.
+This action is to help validate that every file in a repository has an owner
+defined in the codeowners file. Whilst GitHub can validate that a codeowners
+file is correct, it does not actually ensure each file has an owner.
 
-This will scan through the repository files, and if any file not found to have an owner, it will alert on it and fail the check.
+This will scan through the repository files, and if any file not found to have
+an owner, it will alert on it and fail the check.
 
 ## Building and testing locally
 
