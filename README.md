@@ -25,7 +25,7 @@ hash.
 
 ### Inputs
 
-token: Plan github token used to auth to the repository.
+token: Plan GitHub token used to auth to the repository.
 codecodeowners-file: location of file if not located at `.github/CODEOWNERS`
 
 ```yaml
