@@ -46,8 +46,14 @@ export function iterateOnCodeOwners(
   files: string[]
 ): string[] {
   const orphanedFiles: string[] = []
-
+  const ignoreFiles = [
+    'package.json',
+    'yarn.lock',
+    'poetry.lock',
+    'pyproject.toml'
+  ]
   for (const file of files) {
+    if (ignoreFiles.includes(file)) continue // Skip iteration for ignored files
     const owner = getOwner(file, codeOwners)
     core.debug(`file ${file} has owner: ${owner}`)
     if (!owner) {
