@@ -28,8 +28,8 @@ hash.
 
 ### Inputs
 
-token: Plan GitHub token used to auth to the repository.
-codecodeowners-file: location of file if not located at `.github/CODEOWNERS`
+token: Plan GitHub token used to auth to the repository. codecodeowners-file:
+location of file if not located at `.github/CODEOWNERS`
 
 ```yaml
 steps:
@@ -41,7 +41,6 @@ steps:
     uses: robmaxwellirl/codeowner-validator@v1
     with:
       token: ${{ secrets.GITHUB_TOKEN }}
-
 ```
 
 ## Building and testing locally
